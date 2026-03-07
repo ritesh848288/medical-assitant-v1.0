@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}DoctorAI - Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome back, {{ current_user.full_name or current_user.username }}!</h1>
+        <p>Manage your consultations and health records</p>
+    </div>
+    
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <i class="fas fa-comments"></i>
+            <div class="stat-info">
+                <span class="stat-value">{{ conversations|length }}</span>
+                <span class="stat-label">Conversations</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-thermometer-half"></i>
+            <div class="stat-info">
+                <span class="stat-value">{{ symptom_checks|length }}</span>
+                <span class="stat-label">Symptom Checks</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <div class="stat-info">
+                <span class="stat-value">24/7</span>
+                <span class="stat-label">Availability</span>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-shield-alt"></i>
+            <div class="stat-info">
+                <span class="stat-value">Private</span>
+                <span class="stat-label">Secure</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-grid">
+        <!-- Recent Conversations -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3>Recent Consultations</h3>
+                <a href="{{ url_for('chat') }}" class="view-all">New Chat <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="card-content">
+                {% if conversations %}
+                    {% for conv in conversations %}
+                        <div class="conversation-item" onclick="location.href='{{ url_for('chat') }}?conv_id={{ conv.id }}'">
+                            <div class="conv-icon">
+                                <i class="fas fa-comment-medical"></i>
+                            </div>
+                            <div class="conv-info">
+                                <h4>{{ conv.title }}</h4>
+                                <span class="conv-date">{{ conv.updated_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <p>No consultations yet</p>
+                        <a href="{{ url_for('chat') }}" class="btn-small">Start your first consultation</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Recent Symptom Checks -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3>Recent Symptom Checks</h3>
+                <a href="{{ url_for('symptoms') }}" class="view-all">Check Symptoms <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="card-content">
+                {% if symptom_checks %}
+                    {% for check in symptom_checks %}
+                        <div class="symptom-item">
+                            <div class="symptom-severity {{ check.severity }}">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="symptom-info">
+                                <p class="symptom-text">{{ check.symptoms[:50] }}...</p>
+                                <span class="symptom-date">{{ check.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-thermometer-half"></i>
+                        <p>No symptom checks yet</p>
+                        <a href="{{ url_for('symptoms') }}" class="btn-small">Check symptoms now</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="dashboard-card full-width">
+            <div class="card-header">
+                <h3>Quick Actions</h3>
+            </div>
+            
+            <div class="quick-actions-grid">
+                <a href="{{ url_for('chat') }}" class="quick-action">
+                    <i class="fas fa-comment"></i>
+                    <span>Start Consultation</span>
+                </a>
+                
+                <a href="{{ url_for('symptoms') }}" class="quick-action">
+                    <i class="fas fa-search"></i>
+                    <span>Check Symptoms</span>
+                </a>
+                
+                <a href="#" class="quick-action">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Health Records</span>
+                </a>
+                
+                <a href="#" class="quick-action">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointments</span>
+                </a>
+                
+                <a href="#" class="quick-action">
+                    <i class="fas fa-pill"></i>
+                    <span>Medication Reminder</span>
+                </a>
+                
+                <a href="#" class="quick-action">
+                    <i class="fas fa-ambulance"></i>
+                    <span>Emergency Info</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

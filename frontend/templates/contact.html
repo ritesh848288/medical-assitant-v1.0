@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Doctor Assistant{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .contact-info {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        padding: 3rem 2rem;
+        color: white;
+    }
+
+    .contact-info h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .info-items {
+        margin-bottom: 2rem;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .info-item i {
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    .info-item h4 {
+        margin-bottom: 0.25rem;
+    }
+
+    .info-item p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    .social-contact {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .social-contact a {
+        width: 45px;
+        height: 45px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 1.2rem;
+    }
+
+    .social-contact a:hover {
+        background: white;
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    .contact-form {
+        padding: 3rem 2rem;
+    }
+
+    .contact-form h2 {
+        font-size: 2rem;
+        color: var(--dark);
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-form p {
+        color: var(--gray);
+        margin-bottom: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+        font-weight: 500;
+    }
+
+    .form-group label i {
+        color: var(--primary);
+        margin-right: 0.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--border);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .map-container {
+        margin-top: 2rem;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        height: 200px;
+        background: var(--light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--border);
+    }
+
+    .map-placeholder {
+        text-align: center;
+        color: var(--gray);
+    }
+
+    .map-placeholder i {
+        font-size: 3rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .contact-container {
+            grid-template-columns: 1fr;
+        }
+        
+        .contact-info {
+            padding: 2rem;
+        }
+        
+        .contact-form {
+            padding: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <!-- Contact Information -->
+    <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>Have questions about Doctor Assistant? We're here to help. Reach out to us anytime.</p>
+        
+        <div class="info-items">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h4>Visit Us</h4>
+                    <p>123 Medical Center Drive<br>Suite 100<br>New York, NY 10001</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                    <h4>Call Us</h4>
+                    <p>Main: (555) 123-4567<br>Emergency: (555) 765-4321</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h4>Email Us</h4>
+                    <p>info@doctorassistant.com<br>support@doctorassistant.com</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h4>Working Hours</h4>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="social-contact">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <h2>Send a Message</h2>
+        <p>We'll get back to you as soon as possible</p>
+        
+        <form method="POST" action="{{ url_for('contact') }}">
+            <div class="form-group">
+                <label for="name">
+                    <i class="fas fa-user"></i> Your Name
+                </label>
+                <input type="text" id="name" name="name" class="form-control" 
+                       placeholder="John Doe" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">
+                    <i class="fas fa-envelope"></i> Email Address
+                </label>
+                <input type="email" id="email" name="email" class="form-control" 
+                       placeholder="john@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">
+                    <i class="fas fa-tag"></i> Subject
+                </label>
+                <input type="text" id="subject" name="subject" class="form-control" 
+                       placeholder="How can we help?" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">
+                    <i class="fas fa-comment"></i> Message
+                </label>
+                <textarea id="message" name="message" class="form-control" 
+                          placeholder="Tell us more about your inquiry..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+        
+        <div class="map-container">
+            <div class="map-placeholder">
+                <i class="fas fa-map"></i>
+                <p>Interactive Map Coming Soon</p>
+                <p style="font-size: 0.9rem;">123 Medical Center Drive, New York, NY 10001</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

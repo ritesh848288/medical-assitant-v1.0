@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Doctor AI - Medical Assistant{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-stethoscope"></i>
+                <span>DoctorAI</span>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a></li>
+                        <li><a href="{{ url_for('chat') }}" class="nav-link">Chat</a></li>
+                        <li><a href="{{ url_for('symptoms') }}" class="nav-link">Symptoms</a></li>
+                    {% endif %}
+                </ul>
+                
+                <div class="nav-auth">
+                    {% if current_user.is_authenticated %}
+                        <div class="user-menu">
+                            <span class="username">{{ current_user.full_name or current_user.username }}</span>
+                            <a href="{{ url_for('auth.logout') }}" class="btn-logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}" class="btn-login">Login</a>
+                        <a href="{{ url_for('auth.register') }}" class="btn-register">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>DoctorAI</h3>
+                <p>AI-powered medical assistant for preliminary health guidance</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> Emergency: 911</li>
+                    <li><i class="fas fa-envelope"></i> support@doctorai.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Available 24/7</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 DoctorAI. All rights reserved. Not a substitute for professional medical advice.</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

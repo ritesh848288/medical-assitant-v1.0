@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}DoctorAI - Chat Consultation{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="chat-page-container">
+    <!-- Sidebar -->
+    <div class="chat-sidebar">
+        <div class="sidebar-header">
+            <button class="new-chat-btn" id="newChatBtn">
+                <i class="fas fa-plus"></i>
+                New Consultation
+            </button>
+        </div>
+        
+        <div class="conversations-list" id="conversationsList">
+            <h3>Recent Conversations</h3>
+            <!-- Conversations will be loaded here -->
+        </div>
+    </div>
+    
+    <!-- Main Chat Area -->
+    <div class="chat-main">
+        <div class="chat-header">
+            <div class="chat-info">
+                <h2 id="currentChatTitle">New Consultation</h2>
+                <span class="model-badge">
+                    <i class="fas fa-microchip"></i>
+                    Mistral 7B (Offline)
+                </span>
+            </div>
+            
+            <div class="chat-actions">
+                <button class="icon-btn" id="clearChatBtn" title="Clear chat">
+                    <i class="fas fa-eraser"></i>
+                </button>
+                <button class="icon-btn" id="exportChatBtn" title="Export chat">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="messages-container" id="messagesContainer">
+            <div class="welcome-message">
+                <div class="welcome-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Welcome to DoctorAI Consultation</h3>
+                <p>I'm your AI medical assistant. Please describe your symptoms or ask any health-related questions.</p>
+                <p class="disclaimer">Remember: I'm an AI assistant and not a replacement for professional medical advice.</p>
+                
+                <div class="suggested-topics">
+                    <h4>Common Questions:</h4>
+                    <div class="topic-buttons">
+                        <button class="topic-btn">What are symptoms of flu?</button>
+                        <button class="topic-btn">How to lower blood pressure?</button>
+                        <button class="topic-btn">First aid for burns</button>
+                        <button class="topic-btn">When to see a doctor?</button>
+                        <button class="topic-btn">Home remedies for headache</button>
+                        <button class="topic-btn">COVID-19 symptoms</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    id="messageInput" 
+                    placeholder="Type your message here..."
+                    rows="1"
+                ></textarea>
+                
+                <div class="input-actions">
+                    <button class="attach-btn" title="Attach file" disabled>
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="send-btn" id="sendBtn" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="input-footer">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    This is an AI assistant. In emergencies, call emergency services immediately.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Indicator -->
+<div class="typing-indicator" id="typingIndicator">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span class="text">DoctorAI is typing...</span>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}   

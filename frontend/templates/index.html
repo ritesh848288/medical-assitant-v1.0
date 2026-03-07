@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}DoctorAI - Home{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Your AI Medical Assistant</h1>
+        <p>Get preliminary medical guidance powered by Mistral AI</p>
+        
+        {% if current_user.is_authenticated %}
+            <div class="hero-buttons">
+                <a href="{{ url_for('chat') }}" class="btn btn-primary">
+                    <i class="fas fa-comment-medical"></i>
+                    Start Consultation
+                </a>
+                <a href="{{ url_for('symptoms') }}" class="btn btn-secondary">
+                    <i class="fas fa-notes-medical"></i>
+                    Check Symptoms
+                </a>
+            </div>
+        {% else %}
+            <div class="hero-buttons">
+                <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Get Started</a>
+                <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Login</a>
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="hero-image">
+        <i class="fas fa-stethoscope"></i>
+    </div>
+</div>
+
+<div class="features-section">
+    <h2>How We Can Help</h2>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <i class="fas fa-comments"></i>
+            <h3>24/7 Chat Support</h3>
+            <p>Get instant responses to your medical questions anytime</p>
+        </div>
+        
+        <div class="feature-card">
+            <i class="fas fa-thermometer-half"></i>
+            <h3>Symptom Checker</h3>
+            <p>Analyze your symptoms and get preliminary guidance</p>
+        </div>
+        
+        <div class="feature-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Privacy First</h3>
+            <p>Your conversations are private and secure</p>
+        </div>
+        
+        <div class="feature-card">
+            <i class="fas fa-brain"></i>
+            <h3>Powered by Mistral AI</h3>
+            <p>Advanced AI model running completely offline</p>
+        </div>
+    </div>
+</div>
+
+<div class="disclaimer-section">
+    <div class="disclaimer-content">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Important Medical Disclaimer</h3>
+        <p>DoctorAI is an AI assistant for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. In case of emergency, call 911 immediately.</p>
+    </div>
+</div>
+
+<div class="stats-section">
+    <div class="stats-container">
+        <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Availability</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Offline</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">Free</span>
+            <span class="stat-label">Consultations</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">Mistral</span>
+            <span class="stat-label">AI Powered</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
